@@ -10,10 +10,10 @@ class Student{
     string mentorAssigned;
 
     //Mentor Registration
-    void registerForMentorship(Mentor m);
+    // void registerForMentorship(Mentor m);
 
     //Sports Interest Update
-    void updateSportsInterest(Sport s);
+    // void updateSportsInterest(Sport s);
 
     //Mentor's Detail
     void viewMentorDetails();
@@ -28,10 +28,10 @@ class Mentor{
     string assignedLearners[10][100];
 
     //assign Learner 
-    void assignLearner(Student s);
+    // void assignLearner(Student s);
 
-    //Remove Learner
-    void removeLearner(Student s);
+    // //Remove Learner
+    // void removeLearner(Student s);
 
     //Guidance 
     void provideGuidance();
@@ -41,31 +41,57 @@ class Mentor{
 };
 
 class Sports{
+    public:
     int sportID;
     string name; 
     string description;
     string requiredSkil[100];
 
     //add Skill
-    void addSkill(Skill s);
+    // void addSkill(Skill s);
 
-    //Remove Skills
-    void removeSkill(Skill s);
+    // //Remove Skills
+    // void removeSkill(Skill s);
 };
 
 class Skill{
+    public:
     int skillID;
     string skillName;
     string description;
 
+    //Constructor for Skill Section 
+    Skill(int id, string name, string desc) : skillID(id), skillName(name), description(desc) {}
+
     //Skill Detail
-    void skillDetail();
+    void showSkillDetail();
 
     //Add New Desccription
-    updateSkillDescription(string newDescription);
+    void updateSkillDescription(string newDescription);
 };
 
+//Defining Functions
+//SKILL Section 
+void Skill :: showSkillDetail(){\
+    cout << "--------------------" << endl;
+    cout << "Skill Name: " << skillName << endl;
+    cout << " ( " << description << " ) " << endl;
+    cout << "--------------------" << endl;
+}
+
+void Skill :: updateSkillDescription(string newDescription){
+    description = newDescription;
+}
+
+//Sport Section 
+
 int main(){
+    Skill skill01(1030,"Football","Played Since 12");
+
+
+    skill01.updateSkillDescription("Played since 18");
+    skill01.showSkillDetail();
+
 
 return 0;
 }
