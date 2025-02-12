@@ -10,10 +10,10 @@ class Student{
     string mentorAssigned;
 
     //Mentor Registration
-    void registerForMentorship(string mentorAssigned);
+    void registerForMentorship(Mentor m);
 
     //Sports Interest Update
-    void updateSportsInterest();
+    void updateSportsInterest(Sport s);
 
     //Mentor's Detail
     void viewMentorDetails();
@@ -28,10 +28,10 @@ class Mentor{
     string assignedLearners[10][100];
 
     //assign Learner 
-    void assignLearner();
+    void assignLearner(Student s);
 
     //Remove Learner
-    void removeLearner();
+    void removeLearner(Student s);
 
     //Guidance 
     void provideGuidance();
@@ -47,10 +47,10 @@ class Sports{
     string requiredSkil[100];
 
     //add Skill
-    void addSkill();
+    void addSkill(Skill s);
 
     //Remove Skills
-    void removeSkill();
+    void removeSkill(Skill s);
 };
 
 class Skill{
@@ -59,7 +59,10 @@ class Skill{
     string description;
 
     //Skill Detail
-    
+    void skillDetail();
+
+    //Add New Desccription
+    updateSkillDescription(string newDescription);
 };
 
 int main(){
