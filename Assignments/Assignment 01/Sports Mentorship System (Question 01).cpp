@@ -1,19 +1,29 @@
 #include <iostream>
 using namespace std;
 
+//"-----Forward declaration----------"//
+class Skill;
+class Student;
+class Mentor;
+class Sports;
+//"-----------------------------------"//
+
 class Student{
     public:
     int studentID;
-    string name;
+    string studentName;
     int age;
-    string sportsInterests[5][100];
+    string* sportsInterests;
     string mentorAssigned;
 
+    //Constructor 
+    Student(int id, string name,int a) : studentID(id), studentName(name), age(a) {}
+
     //Mentor Registration
-    // void registerForMentorship(Mentor m);
+    void registerForMentorship(Mentor m);
 
     //Sports Interest Update
-    // void updateSportsInterest(Sport s);
+    void updateSportsInterest(Sports s);
 
     //Mentor's Detail
     void viewMentorDetails();
@@ -23,15 +33,15 @@ class Mentor{
     public:
     int mentorID;
     string name;
-    string sportExpertise[10][100];
+    string* sportExpertise;
     int maxLearners;
-    string assignedLearners[10][100];
+    string* assignedLearners;
 
     //assign Learner 
-    // void assignLearner(Student s);
+    void assignLearner(Student s);
 
     // //Remove Learner
-    // void removeLearner(Student s);
+    void removeLearner(Student s);
 
     //Guidance 
     void provideGuidance();
@@ -43,15 +53,18 @@ class Mentor{
 class Sports{
     public:
     int sportID;
-    string name; 
+    string sportName; 
     string description;
-    string requiredSkil[100];
+    string* requiredSkill;
+
+    //Constructor
+    Sports(int id, string name, string desc) : sportID(id), sportName(name), description(desc) {}
 
     //add Skill
-    // void addSkill(Skill s);
+    void addSkill(Skill s);
 
     // //Remove Skills
-    // void removeSkill(Skill s);
+    void removeSkill(Skill s);
 };
 
 class Skill{
@@ -71,11 +84,11 @@ class Skill{
 };
 
 //Defining Functions
-//SKILL Section 
-void Skill :: showSkillDetail(){\
+//SKILL SECTION
+void Skill :: showSkillDetail(){
     cout << "--------------------" << endl;
     cout << "Skill Name: " << skillName << endl;
-    cout << " ( " << description << " ) " << endl;
+    cout << "Description: "<< "'" << description << "'" << endl;
     cout << "--------------------" << endl;
 }
 
@@ -83,15 +96,11 @@ void Skill :: updateSkillDescription(string newDescription){
     description = newDescription;
 }
 
-//Sport Section 
+//SPORTS SECTION
+//STUDENT SECTION 
+//MENTOR SECTION 
 
 int main(){
-    Skill skill01(1030,"Football","Played Since 12");
-
-
-    skill01.updateSkillDescription("Played since 18");
-    skill01.showSkillDetail();
-
 
 return 0;
 }
