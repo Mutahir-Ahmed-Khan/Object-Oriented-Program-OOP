@@ -83,7 +83,7 @@ class Skill{
     void updateSkillDescription(string newDescription);
 };
 
-//Defining Functions
+//--------------------Defining Functions------------------------//
 //SKILL SECTION
 void Skill :: showSkillDetail(){
     cout << "--------------------" << endl;
@@ -99,7 +99,7 @@ void Skill :: updateSkillDescription(string newDescription){
 //SPORTS SECTION
 //STUDENT SECTION 
 //MENTOR SECTION 
-
+//--------------------------------------------------------------//
 int main(){
 
 return 0;
