@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+//mentor Assigned's data-type would be mentor and wil store whole object of mentor (miss abeeha)
+
 //"-----Forward declaration----------"//
 class Skill;
 class Mentor;
