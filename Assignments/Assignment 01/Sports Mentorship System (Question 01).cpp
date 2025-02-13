@@ -3,7 +3,6 @@ using namespace std;
 
 //"-----Forward declaration----------"//
 class Skill;
-class Student;
 class Mentor;
 class Sports;
 //"-----------------------------------"//
