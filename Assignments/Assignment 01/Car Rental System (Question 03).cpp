@@ -1,5 +1,4 @@
-
-#include <iostream>
+\#include <iostream>
 using namespace std;
 
 class User{
@@ -21,12 +20,12 @@ class User{
     };
 };
 
-class Car{
+class Vehicle{
     public:
     string model;
     float price;
     string eligibility;
-
+    
     //Constructor 
     Car(string m, float p,string e) : model(m), price(p), eligibility(e){}
 
@@ -43,10 +42,26 @@ class Car{
 
 };
 
+class Rent{
+    public: 
+    Vehicle **vehicle;
+    int Count;
+
+    //Constructor
+    Rent(int s){
+        Count = s;
+        vehicle = new Vehicle*[Count];
+    }
+
+    //Adding the Cars
+    void addCar(int i,string model, string eligibility, float price){
+        vehicle[i] = new Vehicle(model, price , eligibility);
+    }
+
+    
+
+};
+
 int main(){
-    User user1(25, "B", "user@example.com", 101);
-    Car car1("Toyota", 20000, "B");
-    // user1.update(25,"A","Falana",101);
-    car1.checkRequirements(user1);
-    return 0;
+
 }
