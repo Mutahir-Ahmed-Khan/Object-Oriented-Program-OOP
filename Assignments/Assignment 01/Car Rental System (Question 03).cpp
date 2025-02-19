@@ -101,12 +101,12 @@ class Rent{
 };
 
 int main(){
-   User user1(25, "Full", "alice@example.com", 101);
+   User user1(25, "Full", "Mutahir", 101);
 
    Rent system(3);
-   system.addCar(0, "Toyota Corolla", 30.0, "Full");
-   system.addCar(1, "Honda Civic", 25.0, "Intermediate");
-   system.addCar(2, "Kawasaki Ninja", 40.0, "Learner");
+   system.addCar(0, "C63", 30.0, "Full");
+   system.addCar(1, "M5", 25.0, "Intermediate");
+   system.addCar(2, "911 GT3 RS", 40.0, "Learner");
 
   
    system.display();
