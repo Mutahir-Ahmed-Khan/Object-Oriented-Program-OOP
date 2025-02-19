@@ -55,7 +55,12 @@ class Rent{
 
     //Adding the Cars
     void addCar(int i,string model, string eligibility, float price){
-        vehicle[i] = new Vehicle(model, price , eligibility);
+        if(i > Count){
+            cout << "Index is not right" << endl;
+        }
+        else{
+            vehicle[i] = new Vehicle(model, price , eligibility);
+        }
     }
 
     
