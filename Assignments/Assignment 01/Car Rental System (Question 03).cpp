@@ -1,4 +1,4 @@
-\#include <iostream>
+#include <iostream>
 using namespace std;
 
 class User{
@@ -27,12 +27,18 @@ class Vehicle{
     string eligibility;
     
     //Constructor 
-    Car(string m, float p,string e) : model(m), price(p), eligibility(e){}
+    Vehicle(string m, float p,string e) : model(m), price(p), eligibility(e){}
+
+    //Vehicle Display (learned from Debugging)
+    void display() {
+        cout << "Model: " << model << ", Price per day: $" << price 
+             << ", License Required: " << eligibility << endl;
+    }
 
     void checkRequirements(User user){
         static int flag = 0;
         if(user.licenseType == eligibility){
-            cout << "Eligibile for the car" << endl; 
+            cout << "Eligibile For The Car" << endl; 
             flag = 1;
         }
         else{
@@ -54,19 +60,64 @@ class Rent{
     }
 
     //Adding the Cars
-    void addCar(int i,string model, string eligibility, float price){
-        if(i > Count){
-            cout << "Index is not right" << endl;
+    void addCar(int i,string model, float price, string eligiblity){
+        vehicle[i] = new Vehicle(model, price , eligiblity);
+    }
+
+    void display(){
+        cout << "---------- Vehicle ----------" << endl;
+        for(int i = 0; i < Count; i++){
+            cout << i + 1 << "- ";
+            vehicle[i]->display();
+        }
+
+        cout << "-----------------------------" << endl;
+    }
+
+    //Checking the eligiblity
+    void checkEligibility(User user, int i){
+        if(i < 0 || i >= Count){
+            cout << "There are no such Car" << endl;
+
+        }
+
+        if(user.licenseType == vehicle[i]->eligibility){
+            cout << "you have Successfully Rented " << vehicle[i] -> model << endl;
         }
         else{
-            vehicle[i] = new Vehicle(model, price , eligibility);
+            cout << "unable to rent a Car" << endl;
         }
     }
 
+    //Destructor
+    ~Rent(){
+        for(int i = 0; i < Count ; i++){
+            delete vehicle[i];
+        }
     
+        delete[] vehicle;
+    }
 
 };
 
 int main(){
+   User user1(25, "Full", "alice@example.com", 101);
 
+   Rent system(3);
+   system.addCar(0, "Toyota Corolla", 30.0, "Full");
+   system.addCar(1, "Honda Civic", 25.0, "Intermediate");
+   system.addCar(2, "Kawasaki Ninja", 40.0, "Learner");
+
+  
+   system.display();
+
+   
+   int choice;
+   while(choice != -1){
+    cout << "Enter the vehicle number you want to rent: (-1 to exit) ";
+    cin >> choice;
+    system.checkEligibility(user1, choice - 1);
+   }
+
+    return 0;
 }
