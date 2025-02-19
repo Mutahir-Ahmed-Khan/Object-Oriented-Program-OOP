@@ -65,27 +65,27 @@ class Rent{
     }
 
     void display(){
-        cout << "---------- Vehicle ----------" << endl;
+        cout << "------------------------------- Vehicle ---------------------------" << endl;
         for(int i = 0; i < Count; i++){
             cout << i + 1 << "- ";
             vehicle[i]->display();
         }
 
-        cout << "-----------------------------" << endl;
+        cout << "-------------------------------------------------------------------" << endl;
     }
 
     //Checking the eligiblity
     void checkEligibility(User user, int i){
-        if(i < 0 || i >= Count){
-            cout << "There are no such Car" << endl;
+        if(i < -1 || i >= Count){
+            cout << "Invalid" << endl;
 
         }
 
         if(user.licenseType == vehicle[i]->eligibility){
-            cout << "you have Successfully Rented " << vehicle[i] -> model << endl;
+            cout << "you can Successfully Rent the " << vehicle[i] -> model << endl;
         }
         else{
-            cout << "unable to rent a Car" << endl;
+            cout << "Unable to rent a Car " << vehicle[i] -> model << endl;
         }
     }
 
@@ -113,10 +113,17 @@ int main(){
 
    
    int choice;
-   while(choice != -1){
+   while(1){
     cout << "Enter the vehicle number you want to rent: (-1 to exit) ";
     cin >> choice;
+
+    if(choice == -1){
+        cout << "System Shut Down....." << endl;
+        break;
+    }
+    
     system.checkEligibility(user1, choice - 1);
+    cout << "\n";
    }
 
     return 0;
