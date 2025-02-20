@@ -17,10 +17,10 @@ public:
 
     //Displaying to Check wether the codes run or not
     void displayInfo() {
-        cout << "Student ID: " << studentID << "\n";
-        cout << "Name: " << name << "\n";
-        cout << "Status: " << Active << "\n";
-        cout << "Fee Paid: " << fee << "\n\n";
+        cout << "Student ID: " << studentID << endl;
+        cout << "Name: " << name << endl;
+        cout << "Status: " << Active << endl;
+        cout << "Fee Paid: " << fee << endl;
     }
 };
 
