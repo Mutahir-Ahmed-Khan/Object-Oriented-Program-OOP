@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+//Create getter and setter for the Fee Payment 
+//Make Proper Menu for the System 
+
 class Students {
 public:
     int studentID;
