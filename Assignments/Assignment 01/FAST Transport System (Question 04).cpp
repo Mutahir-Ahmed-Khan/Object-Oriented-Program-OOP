@@ -72,8 +72,39 @@ private:
 
 };
 
-// class attendance{
-// };
+class Attendance{
+    public:
+    string* attendance;
+
+    public:
+    //DMA
+    Attendance(){
+        attendance = new string[30];
+        for (int i = 0; i < 30; i++) {
+            attendance[i] = "*"; 
+        }
+    } 
+    // Destructor 
+    ~Attendance() {
+        delete[] attendance;
+    }
+
+    //Recording Attendance
+    void setAttendance(int Date,string status){
+        if(Date >= 1 && Date <= 31){
+            this -> attendance[Date - 1] = status;
+        }
+        else{
+            cout << "Re-Enter Day is Not Corrrect";
+        }
+    }
+
+    string getAttendance(int Date) {
+            return attendance[Date - 1];
+    }
+    
+    
+};
 // class Bus{
 // };
 
@@ -83,8 +114,9 @@ private:
 
 int main() {
     Students student01;
-    int id,opt,f;
-    string n,d,drop,pick;
+    Attendance attendance;
+    int id,opt,f,date;
+    string n,d,drop,pick,att;
     bool end = true;
 
     while(end){
@@ -93,7 +125,8 @@ int main() {
         cout << "2. Make Payment" << endl;
         cout << "3. Set Drop Off and Pick Up" << endl;
         cout << "4. Display Student's Info" << endl;
-        cout << "(-1) to exit the system" << endl;
+        cout << "5. Record The Attendance" << endl;
+        cout << "(-1) to Exit the system" << endl;
         cout << "-------------------" << endl;
         cout << "Enter the Option: ";
         cin >> opt;
@@ -111,8 +144,7 @@ int main() {
                 student01.setName(n);
 
                 cout << "Enter the Department: ";
-                cin.ignore();
-                getline(cin,n);
+                getline(cin,d);
                 student01.setDepartment(d);
                 cout << "*********************" << endl;
                 break;
@@ -146,7 +178,20 @@ int main() {
                 cout << "Card Status: " << student01.getIsActive() << endl;
                 cout << "While Going-- "<<"Pick Up:" << student01.getPickUp() << " :: " << "Drop Off:" << student01.getDropOff() << endl;
                 cout << "While Coming Back-- " <<"Pick Up:" << student01.getDropOff() << " :: " << "Drop Off:" << student01.getPickUp() << endl;
+                cout << "----------- Attendace ----------" << endl;
+                    for(int i = 0; i < 30; i++){
+                        cout << "Day " << i+1 << ":" << attendance.getAttendance(i+1) << endl;
+                    }
+                cout << "--------------------------------" << endl;
                 cout << "****************************************" << endl;
+                break;
+            case 5:
+                cout << "Enter the Date: ";
+                cin >> date;
+                cout << "(Present/Absent): ";
+                cin >> att;
+                attendance.setAttendance(date,att);
+                cout << "Attendance recorded for Day " << date << ": " << attendance.getAttendance(date) << endl;
                 break;
             case -1:
                 cout << "Exiting the System...." << endl;
