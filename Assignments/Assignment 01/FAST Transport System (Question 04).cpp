@@ -164,11 +164,11 @@ int main() {
     while(end){
         cout << "-------------------" << endl;
         cout << "1. Register Student" << endl;
-        cout << "2. Make Payment" << endl;
-        cout << "3. Set Drop Off and Pick Up" << endl;
-        cout << "4. Display Student's Info" << endl;
-        cout << "6. Register for the Bus" << endl;
+        cout << "2. Register for the Bus" << endl;
+        cout << "3. Make Payment" << endl;
+        cout << "4. Set Drop Off and Pick Up" << endl;
         cout << "5. Record The Attendance" << endl;
+        cout << "6. Display Student's Info" << endl; 
         cout << "(-1) to Exit the system" << endl;
         cout << "-------------------" << endl;
         cout << "Enter the Option: ";
@@ -192,51 +192,6 @@ int main() {
                 cout << "*********************" << endl;
                 break;
             case 2:
-                cout << "Enter the Fee: ";
-                cin >> f;
-                student01.makePayment(f);
-                cout << student01.getName() << "'s" <<" ("<< student01.getID() << ") "<< "Card: " << student01.getIsActive() << endl;
-                break;
-            case 3:
-                if(student01.getIsActive() == "Active"){
-                    cout << "Enter the Pick Up: ";
-                    cin.ignore();
-                    getline(cin,pick);
-                    student01.setPickUp(pick);
-
-                    cout << "Enter the Drop Off: ";
-                    cin.ignore();
-                    getline(cin,drop);
-                    student01.setDropOff(drop);
-                }
-                else{
-                    cout << "Clear Payment First" << endl;
-                }
-                break;
-            case 4:
-                cout << "****************************************" << endl;
-                cout << "Name: " << student01.getName() << endl;
-                cout << "Roll No: " << student01.getID() << endl;
-                cout << "Department: " << student01.getDepartment() << endl;
-                cout << "Card Status: " << student01.getIsActive() << endl;
-                cout << "While Going-- "<<"Pick Up:" << student01.getPickUp() << " :: " << "Drop Off:" << student01.getDropOff() << endl;
-                cout << "While Coming Back-- " <<"Pick Up:" << student01.getDropOff() << " :: " << "Drop Off:" << student01.getPickUp() << endl;
-                cout << "----------- Attendace ----------" << endl;
-                    for(int i = 0; i < 30; i++){
-                        cout << "Day " << i+1 << ":" << attendance.getAttendance(i+1) << endl;
-                    }
-                cout << "--------------------------------" << endl;
-                cout << "****************************************" << endl;
-                break;
-            case 5:
-                cout << "Enter the Date: ";
-                cin >> date;
-                cout << "(Present/Absent): ";
-                cin >> att;
-                attendance.setAttendance(date,att);
-                cout << "Attendance recorded for Day " << date << ": " << attendance.getAttendance(date) << endl;
-                break;
-            case 6:
                 bus1.displayBusInfo();
                 bus2.displayBusInfo();
                 bus3.displayBusInfo();
@@ -256,11 +211,61 @@ int main() {
                     cout << "Invalid Bus Selection" << endl;
                 }
                 break;
+            case 3:
+                cout << "Enter the Fee: ";
+                cin >> f;
+                student01.makePayment(f);
+                cout << student01.getName() << "'s" <<" ("<< student01.getID() << ") "<< "Card: " << student01.getIsActive() << endl;
+                break;
+            case 4:
+                if(student01.getIsActive() == "Active"){
+                    cout << "Enter the Pick Up: ";
+                    cin.ignore();
+                    getline(cin,pick);
+                    student01.setPickUp(pick);
+
+                    cout << "Enter the Drop Off: ";
+                    cin.ignore();
+                    getline(cin,drop);
+                    student01.setDropOff(drop);
+                }
+                else{
+                    cout << "Clear Payment First" << endl;
+                }
+                break;
+            case 5:
+                cout << "Enter the Date: ";
+                cin >> date;
+                cout << "(Present/Absent): ";
+                cin >> att;
+                attendance.setAttendance(date,att);
+                cout << "Attendance recorded for Day " << date << ": " << attendance.getAttendance(date) << endl;
+                break;
+            case 6:
+                cout << "****************************************" << endl;
+                cout << "Name: " << student01.getName() << endl;
+                cout << "Roll No: " << student01.getID() << endl;
+                cout << "Department: " << student01.getDepartment() << endl;
+                cout << "Card Status: " << student01.getIsActive() << endl;
+                cout << "While Going-- "<<"Pick Up:" << student01.getPickUp() << " :: " << "Drop Off:" << student01.getDropOff() << endl;
+                cout << "While Coming Back-- " <<"Pick Up:" << student01.getDropOff() << " :: " << "Drop Off:" << student01.getPickUp() << endl;
+                cout << "----------- Attendace ----------" << endl;
+                    for(int i = 0; i < 30; i++){
+                        cout << "Day " << i+1 << ":" << attendance.getAttendance(i+1) << endl;
+                    }
+                cout << "--------------------------------" << endl;
+                cout << "****************************************" << endl;
+                end = false;
+                break;
             case -1:
                 cout << "Exiting the System...." << endl;
                 end = false;
                 break;
+            default:
+                    cout << "See the Menu Again and Choose The Option Again" << endl;  
         }
     }
+
+    return 0;
 
 }
