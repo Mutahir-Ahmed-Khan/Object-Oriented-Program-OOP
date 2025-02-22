@@ -100,22 +100,64 @@ class Attendance{
     }
 
     string getAttendance(int Date) {
+        if (Date >= 1 && Date <= 30) {
             return attendance[Date - 1];
+        } else {
+            return "Invalid Date!";
+        }
     }
     
     
 };
-// class Bus{
-// };
 
-
-
-
+class Bus {
+    private:
+        string busID;
+        string routeID;
+        int capacity;
+        int assignedStudents[10];
+        int studentCount;
+    
+    public:
+        // Constructor
+        Bus(string id, string route, int cap) : busID(id), routeID(route), capacity(cap), studentCount(0) {
+            for (int i = 0; i < 10; i++) {
+                assignedStudents[i] = 0;
+            }
+        }
+    
+        void assignStudent(int studentID) {
+            if (studentCount < capacity) {
+                assignedStudents[studentCount++] = studentID;
+                cout << "Student " << studentID << " assigned to Bus " << busID << endl;
+            } else {
+                cout << "Bus " << busID << " is full! Cannot assign more students." << endl;
+            }
+        }
+    
+        void displayBusInfo() {
+            cout << "----------------------------------" << endl;
+            cout << "Bus ID: " << busID << endl;
+            cout << "Route ID: " << routeID << endl;
+            cout << "Capacity: " << capacity << endl;
+            cout << "Assigned Students: " << (studentCount > 0 ? "" : "None") << endl;
+            
+            for (int i = 0; i < studentCount; i++) {
+                cout << "- " << assignedStudents[i] << endl;
+            }
+    
+            cout << "----------------------------------" << endl;
+        }
+    };
+    
 
 int main() {
+    Bus bus1("B001", "Route A", 5);
+    Bus bus2("B002", "Route B", 7);
+    Bus bus3("B003", "Route C", 6);
     Students student01;
     Attendance attendance;
-    int id,opt,f,date;
+    int id,opt,f,date,busChoice;
     string n,d,drop,pick,att;
     bool end = true;
 
@@ -125,6 +167,7 @@ int main() {
         cout << "2. Make Payment" << endl;
         cout << "3. Set Drop Off and Pick Up" << endl;
         cout << "4. Display Student's Info" << endl;
+        cout << "6. Register for the Bus" << endl;
         cout << "5. Record The Attendance" << endl;
         cout << "(-1) to Exit the system" << endl;
         cout << "-------------------" << endl;
@@ -192,6 +235,26 @@ int main() {
                 cin >> att;
                 attendance.setAttendance(date,att);
                 cout << "Attendance recorded for Day " << date << ": " << attendance.getAttendance(date) << endl;
+                break;
+            case 6:
+                bus1.displayBusInfo();
+                bus2.displayBusInfo();
+                bus3.displayBusInfo();
+                cout << "Select Bus (1, 2, or 3): ";
+                cin >> busChoice;
+
+                if (busChoice == 1) {
+                    bus1.assignStudent(id);
+                }
+                else if (busChoice == 2){
+                    bus2.assignStudent(id);
+                }
+                else if (busChoice == 3) {
+                    bus3.assignStudent(id);
+                }
+                else {
+                    cout << "Invalid Bus Selection" << endl;
+                }
                 break;
             case -1:
                 cout << "Exiting the System...." << endl;
