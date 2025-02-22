@@ -72,11 +72,12 @@ private:
 
 };
 
+// class attendance{
+// };
 // class Bus{
 // };
 
-// class attendance{
-// };
+
 
 
 
@@ -91,6 +92,7 @@ int main() {
         cout << "1. Register Student" << endl;
         cout << "2. Make Payment" << endl;
         cout << "3. Set Drop Off and Pick Up" << endl;
+        cout << "4. Display Student's Info" << endl;
         cout << "(-1) to exit the system" << endl;
         cout << "-------------------" << endl;
         cout << "Enter the Option: ";
@@ -135,6 +137,16 @@ int main() {
                 else{
                     cout << "Clear Payment First" << endl;
                 }
+                break;
+            case 4:
+                cout << "****************************************" << endl;
+                cout << "Name: " << student01.getName() << endl;
+                cout << "Roll No: " << student01.getID() << endl;
+                cout << "Department: " << student01.getDepartment() << endl;
+                cout << "Card Status: " << student01.getIsActive() << endl;
+                cout << "While Going-- "<<"Pick Up:" << student01.getPickUp() << " :: " << "Drop Off:" << student01.getDropOff() << endl;
+                cout << "While Coming Back-- " <<"Pick Up:" << student01.getDropOff() << " :: " << "Drop Off:" << student01.getPickUp() << endl;
+                cout << "****************************************" << endl;
                 break;
             case -1:
                 cout << "Exiting the System...." << endl;
