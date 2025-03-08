@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+//Nothing would be happened if we did not make this function const as const function does not change the Values of variable, but would not work if we try to call it from const object 
+//What happens if you do not make your function constant? Add a comment right above your function explaining why we make a function constant.
+
 class ValidateString {
 private:
     string text;  
