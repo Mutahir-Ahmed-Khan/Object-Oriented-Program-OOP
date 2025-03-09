@@ -15,35 +15,11 @@ class Message{
         return text;
     }
 
-    bool ContainKeyword(const Message &messageObject, const string &keyword) {
-        string msg = messageObject.toString(); 
-        int textLength = msg.length();
-        int keywordLength = keyword.length();
-
-        if (keywordLength > textLength) {
-            return false; 
-        }
-
-        for (int i = 0; i <= textLength - keywordLength; i++) {
-            bool match = true;
-            for (int j = 0; j < keywordLength; j++) {
-                if (msg[i + j] != keyword[j]) {
-                    match = false;
-                    break; 
-                }
-            }
-            if (match) {
-                return true; 
-            }
-        }
-        return false; 
-    }
 };
-
 
 class SMS : public Message{
     private:
-    string recipentContactNo;
+    string recipientContactNo;
 
     public:
     string fullMsg;
@@ -51,11 +27,11 @@ class SMS : public Message{
     //Functions
     //Accessor (Getter)
     string getPhone(){
-        return recipentContactNo;
+        return recipientContactNo;
     }
     //Mutator (Setter)
-    void setPhone(string recipentContactNo){
-        this-> recipentContactNo = recipentContactNo;
+    void setPhone(string recipientContactNo){
+        this-> recipientContactNo = recipientContactNo;
     }
 
     //Concatenating
@@ -110,14 +86,6 @@ int main(){
     sms.setText("Hello My name is Mutahir Ahmed Khan");
     sms.setPhone("0300-0073812");
     sms.MessageConcatenate();
-
-    string keyword1 = "Mutahir";
-    if (sms.ContainKeyword(sms, keyword1)) {
-        cout << "Keyword '" << keyword1 << "' found in SMS!" << endl;
-    } 
-    else {
-        cout << "Keyword '" << keyword1 << "' not found in SMS!" << endl;
-    }
 
     Email email;
     email.setText("This is an Email from Mutahir Ahmed Khan");
