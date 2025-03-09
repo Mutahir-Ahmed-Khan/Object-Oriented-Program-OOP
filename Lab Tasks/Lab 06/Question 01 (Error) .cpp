@@ -7,12 +7,29 @@ class Message{
     string text;
 
     public:
+    string EncodedMessage;
+    int MessageLength;
     //Functions
     void setText(string text){
         this-> text = text;
     }
     string toString(){
         return text;
+    }
+
+    //Finding the Keyword (To be Made)
+
+    //Encoding
+    void Encoding(){
+        string code;
+        EncodedMessage = toString();
+        MessageLength = EncodedMessage.length();
+
+        for(int i = 0; i < MessageLength; i++){
+            code += EncodedMessage[i] + 1; //Concatenating
+        }
+
+        cout << "Encoded Message: " << code << endl;
     }
 
 };
@@ -86,6 +103,7 @@ int main(){
     sms.setText("Hello My name is Mutahir Ahmed Khan");
     sms.setPhone("0300-0073812");
     sms.MessageConcatenate();
+    sms.Encoding();
 
     Email email;
     email.setText("This is an Email from Mutahir Ahmed Khan");
