@@ -18,6 +18,17 @@ class Message{
     }
 
     //Finding the Keyword (To be Made)
+    void Keyword(const Message &messageObject, const string &keyword){
+        string subString = messageObject.text;
+        size_t pos = subString.find(keyword);
+        if(pos != std::string::npos){
+            cout << "Founded" << endl;
+        }
+        else{
+            cout << "Not found!" << endl;
+        }
+
+    }
 
     //Encoding
     void Encoding(){
@@ -104,6 +115,8 @@ int main(){
     sms.setPhone("0300-0073812");
     sms.MessageConcatenate();
     sms.Encoding();
+
+    sms.Keyword(sms, "Mutahir");
 
     Email email;
     email.setText("This is an Email from Mutahir Ahmed Khan");
