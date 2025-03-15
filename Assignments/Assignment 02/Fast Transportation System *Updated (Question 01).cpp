@@ -1,25 +1,23 @@
 #include <iostream>
 using namespace std;
 
-//Polymorphesim in Make Payments
+// Composition in Students, if a student object is deleted, fee pickup and drop-off would be deleted too
+//Aggrigation in bus, if a bus object is deleted the students would remain
 
 //-----------NEW ------------------------
 class Person{
     public:
     string name;
     int ID; 
-    const int VIPFee = 7000; 
-    int fee; 
 
-    void payTeachers(int fee){
-        this-> fee = fee;
-        if(this-> fee >= VIPFee){
-            cout << "Fee is Cleared for this month" << endl;
-        }
-        else{
-            cout << "Fee not Cleared" << endl;
-        }
+    Person(){
+        cout << "I am teh constructor of Person " << endl;
     }
+
+    ~Person(){
+        cout <<"I am the Destructor of Person" << endl;
+    }
+    virtual void Pay(int fee) = 0;
 };
 //--------------------------------------------------
 
@@ -73,7 +71,7 @@ private:
             isActive = "Active";
         }
         else{
-            isActive = "Not Active";
+            isActive = "InActive";
             cout << "Fee is Not Cleared" << endl;
         }
     }
@@ -176,9 +174,17 @@ class Bus {
 class teacher : public Person{
     private: 
     string subject;
+    int teacherFee = 7000;
 
     public:
     //Constructor of Teacher and Students
+    teacher() : Person() {
+        cout <<"I am the constructor of Teacher" << endl;
+    }
+
+    ~teacher(){
+        cout << "I am the Destructor of the " << name << endl;
+    }
 
     //Function
     void setSubject(string subject){
@@ -188,14 +194,31 @@ class teacher : public Person{
         return subject;
     }
 
+    void Pay(int fee) override {
+        if (fee >= teacherFee) {
+            cout << "Teacher's : Payment Cleared" << endl;
+        } 
+        else {
+            cout << "Insufficient amount. Payment Pending" << endl;
+        }
+    }
+
 };
 
 class staff: public Person{
     public: 
     string Area;
+    const int staffFee = 5000;
 
     public: 
     //Constructor of students and Staff Memeber
+    staff() : Person(){
+        cout <<"I am the Constructor of Staff" << endl;
+    }
+
+    ~staff(){
+        cout << "I am the Destructor of the " << name << endl;
+    }
 
     //Function
     void setArea(string Area){
@@ -203,6 +226,15 @@ class staff: public Person{
     }
     string getArea(){
         return Area;
+    }
+
+    void Pay(int fee) override {
+        if (fee >= staffFee) {
+            cout << "Staff : Payment Cleared" << endl;
+        } 
+        else {
+            cout << "Insufficient amount. Payment Pending" << endl;
+        }
     }
     
 };
@@ -214,7 +246,7 @@ int main() {
     Bus bus3("B003", "Route C", 6);
     Students student01;
     Attendance attendance;
-    int id,opt,f,date,busChoice,adminChoice,pay;
+    int id,opt,f,date,busChoice,adminChoice,pay,fee,Id;
     string n,d,drop,pick,att;
     bool end = true;
     Person *ptr = nullptr;
@@ -318,6 +350,10 @@ int main() {
                 end = false;
                 break;
             case 7:
+                    if (ptr){
+                        delete ptr;
+                        ptr = nullptr;
+                    }
                     cout << "-------------------" << endl;
                     cout << "1. Teacher " << endl;
                     cout << "2. Staff " << endl;
@@ -329,29 +365,34 @@ int main() {
                         case 1: 
                             ptr = new teacher();
 
-                            cout << "Enter the Name: " << endl;
+                            cout << "Enter the Name: ";
                             cin.ignore();
                             getline(cin, ptr->name);
+
+                            cout << "Enter the ID: ";
+                            cin >> ptr->ID;
                             break;
                         case 2: 
                             ptr = new staff();
 
-                            cout << "Enter the Name: " << endl;
+                            cout << "Enter the Name: ";
+                            cin.ignore();
                             getline(cin, ptr->name);
+
+                            cout << "Enter the ID: ";
+                            cin >> ptr->ID;
                             break;
-                    }
+                        }
                 break;
             case 8:
-                if (ptr) {  
-                    cout << "Enter the Fees: ";
-                    cin >> pay;
-                    ptr->payTeachers(pay);
-                    delete ptr;  
-                    ptr = nullptr;
-                } 
-                else{
-                    cout << "No staff or teacher registered yet" << endl;
-                }
+            if (ptr) {
+                cout << "Enter Fee Amount: ";
+                cin >> fee;
+                ptr->Pay(fee);
+            } else {
+                cout << "No person registered yet" << endl;
+            }
+            break;
             break;
             case -1:
                 cout << "Exiting the System...." << endl;
