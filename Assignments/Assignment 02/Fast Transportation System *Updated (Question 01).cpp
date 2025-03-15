@@ -11,7 +11,7 @@ class Person{
     int ID; 
 
     Person(){
-        cout << "I am teh constructor of Person " << endl;
+        cout << "I am the constructor of Person " << endl;
     }
 
     ~Person(){
