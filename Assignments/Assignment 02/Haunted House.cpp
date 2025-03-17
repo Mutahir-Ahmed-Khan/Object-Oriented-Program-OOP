@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//------------------------------------Ghosts------------------------------------------------------------
+//-------------------------------------------------------------Ghosts------------------------------------------------------------
 class Ghosts{
     private:
     string workerName;
@@ -9,12 +9,10 @@ class Ghosts{
 
     public:
     //Constructor
-    Ghosts(string name, int level) : workerName(name), scareLevel(level) {}
+    Ghosts(string name,int level) : workerName(name), scareLevel(level) {}
 
     //Functions
     virtual void haunt() = 0;
-
-
 };
 
 class poltergeists : public Ghosts{
@@ -35,7 +33,7 @@ class Banshees : public Ghosts{
     Banshees(string name) : Ghosts(name,2) {}
 
     //Function 
-    void haunt() override {
+    void haunt() override{
         cout << "*Screaming Loudly" << endl;
     }
 };
@@ -49,7 +47,6 @@ class ShadowGhosts : public Ghosts{
     void haunt() override {
         cout << "*Whispering Crrepily" << endl;
     }
-
 };
 //-----------------------------------------------------------------------------------------------------
 
