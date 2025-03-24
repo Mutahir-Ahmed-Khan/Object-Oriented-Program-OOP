@@ -2,6 +2,8 @@
 #include <iomanip>
 using namespace std;
 
+// Operator overloading would be used in mutants, when combining two ghosts
+
 //-------------------------------------------------------------Ghosts------------------------------------------------------------//
 class Ghosts{
     private:
