@@ -14,6 +14,8 @@ class bankAccount{
     public: 
     bankAccount(int a, double b) : accNum(a) , balance(b) {}
 
+    bankAccount() : accNum(0), balance(0) {}
+
     //Getter and setter 
     int getAccNum(){
         return accNum;
@@ -36,10 +38,26 @@ class bankAccount{
     }
 
     //----------------------------------------------Operations---------------------------------------------//
-    bankAccount + (bankAccount &obj){
-        return (balance + obj.balance);
+    bankAccount operator+ (const bankAccount &obj) const{
+        return bankAccount(0,balance + obj.balance);
     }
 
+    bankAccount operator- (const bankAccount &obj) const{
+        return bankAccount(0,obj.balance - balance);
+    }
+
+    bankAccount operator* (const bankAccount &obj) const{
+        return bankAccount(0,balance * obj.balance);
+    }
+
+    bankAccount operator/ (const bankAccount &obj) const {
+        if(obj.balance == 0){
+            cout << "Error, Cannot Divide By Zero" << endl;
+            return bankAccount(0,0);
+        }
+        return bankAccount(0,balance / obj.balance);
+    }
+    //----------------------------------------------Operations---------------------------------------------//
 };
 
 class savingAccount : public bankAccount{
@@ -164,7 +182,27 @@ class currentAccount : public bankAccount{
 };
 
 int main(){
+    bankAccount b1(1020,100);
+    bankAccount b2(1024,0);
 
+
+    
+
+    //Addition
+    bankAccount add = b1 + b2;
+    cout << "(Addition) Balance : $" << add.getBalance() << endl;
+
+    //Subtraction
+    bankAccount subtract = b1 - b2;
+    cout << "(Subtraction) Balance : $" << subtract.getBalance() << endl;
+
+    //Multiplication
+    bankAccount multiply = b1 * b2;
+    cout << "(Multiplication) Balance: $" << multiply.getBalance() << endl;
+
+    // Division
+    bankAccount divide = b1 / b2;
+    cout << "(Division) Balance: $" << divide.getBalance() << endl;
 
     return 0;
 }
