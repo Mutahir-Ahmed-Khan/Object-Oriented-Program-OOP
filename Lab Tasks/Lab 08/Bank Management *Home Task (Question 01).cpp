@@ -44,11 +44,15 @@ class savingAccount : public bankAccount{
         cout << right << setw(30) << "----- Saving Account -----" << endl;;
     }
 
+    //----------------------------------------------Interest-----------------------------------------------//
+
     void calcInterest() override {
         setBalance(getBalance() + (getBalance() * interest));
-    }    
+    }  
+
+    //----------------------------------------------Interest-----------------------------------------------//
     
-    //----------------------------------------------Deposit Functions----------------------------------------------//
+    //----------------------------------------------Deposit-----------------------------------------------//
     void deposit(double amount){
         setBalance(getBalance() + amount);
         cout <<"$"<< amount << " Have been depsoited via Cash in " << getAccNum() <<  endl;
@@ -70,7 +74,7 @@ class savingAccount : public bankAccount{
         " through "<< num << "("<< name <<")" << endl;
     }
 
-    //----------------------------------------------Deposit Functions----------------------------------------------//
+    //----------------------------------------------Deposit-----------------------------------------------//
 
     //----------------------------------------------Withdraw----------------------------------------------//
     void withdraw(double amount) override {
@@ -100,7 +104,7 @@ class currentAccount : public bankAccount{
         cout << right << setw(30) << "----- Current Account -----" << endl;
     }
 
-    //----------------------------------------------Deposit Functions----------------------------------------------//
+   //----------------------------------------------Deposit-----------------------------------------------//
     void deposit(double amount){
         setBalance(getBalance() + amount);
         cout <<"$"<< amount << " Have been depsoited via Cash in " << getAccNum() <<  endl;
@@ -122,7 +126,7 @@ class currentAccount : public bankAccount{
         " through "<< num << "("<< name <<")" << endl;
     }
 
-    //----------------------------------------------Deposit Functions----------------------------------------------//
+    //----------------------------------------------Deposit-----------------------------------------------//
 
     //----------------------------------------------Withdraw----------------------------------------------//
     void withdraw(double amount) override {
