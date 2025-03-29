@@ -2,6 +2,9 @@
 #include <iomanip>
 using namespace std;
 
+class savingAccount;
+class currentAccount;
+
 class bankAccount{
     private: 
     int accNum; 
@@ -27,9 +30,14 @@ class bankAccount{
         balance -= amount;
     }
 
-
+    //Calc Interest
     virtual void calcInterest(){
         balance += (balance * interest);
+    }
+
+    //----------------------------------------------Operations---------------------------------------------//
+    bankAccount + (bankAccount &obj){
+        return (balance + obj.balance);
     }
 
 };
@@ -156,9 +164,7 @@ class currentAccount : public bankAccount{
 };
 
 int main(){
-    currentAccount SA(1030,1000);
-    SA.withdraw(2001);
-    SA.displayBalance();
+
 
     return 0;
 }
