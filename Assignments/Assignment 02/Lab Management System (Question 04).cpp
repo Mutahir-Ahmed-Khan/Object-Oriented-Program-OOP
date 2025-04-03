@@ -15,7 +15,8 @@ string GenHash(string pass) {
     }
     return hashed;
 }
-class User{
+
+class User {
 private:
     string name;
     int ID;
@@ -65,24 +66,71 @@ public:
             cout << "Not Verified" << endl;
         }
     }
-    //Getter and Setter 
-    string* getPermission(){
+    // Getter for permissions
+    string* getPermission() {
         return permissions;
     }
 };
 
-class Student : public User{
-    public:
-    //Construtor 
-    Student(string n, int id, string e, string p) : User(n,id,e,1,p) {
+class Student : public User {
+public:
+    int status = 0;
+    // Constructor
+    Student(string n, int id, string e, string p) : User(n, id, e, 1, p) {
         getPermission()[0] = "Only Allowed to submit Assignments";
         cout << right << setw(28) << "----- Student -----" << endl;
+    }
+    // List of Assignments
+    void listOfAssignments(int assignNum) {
+        string assignments[assignNum];
+        int num;
+
+        for (int i = 0; i < assignNum; i++) {
+            assignments[i] = "Not Submitted";
+        }
+
+        for (int i = 0; i < assignNum; i++) {
+            cout << "Assignment #" << i + 1 << ": " << assignments[i] << endl;
+        }
+        cout << right << setw(30) << "*********************************************" << endl;
+        cout << "\n";
+
+        cout << "Submit Assignment: " << endl;
+        do {
+            cout << "Enter Assignment # to Submit (or -1 to quit): ";
+            cin >> num;
+            cin.ignore(); 
+
+            if (num > assignNum || num < -1) {
+                cout << "Invalid Assignment Number" << endl;
+                if(num == -1){
+                    status--;
+                }
+            }
+            else if (num >= 1 && num <= assignNum) {
+                assignments[num - 1] = "Submitted";
+                if(status < assignNum){
+                    status++;
+                }
+            }
+        } while (num != -1);
+
+        cout << "\n";
+
+        cout << "Updated Assignments List:" << endl;
+        for (int i = 0; i < assignNum; i++) {
+            cout << "Assignment #" << i + 1 << ": " << assignments[i] << endl;
+        }
+        cout << right << setw(30) << "*********************************************" << endl;
     }
 
 };
 
 int main() {
-    Student s1("Mutahir", 1020, "MutahirHere18@gmail.com","MAK000");
-    s1.display();    
+    Student s1("Mutahir", 1020, "MutahirHere18@gmail.com", "MAK000");
+    s1.display();
+    s1.listOfAssignments(3);  
+
     return 0;
 }
+
