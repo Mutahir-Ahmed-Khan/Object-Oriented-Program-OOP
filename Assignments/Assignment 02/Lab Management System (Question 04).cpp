@@ -78,7 +78,7 @@ public:
     // Constructor
     Student(string n, int id, string e, string p) : User(n, id, e, 1, p) {
         getPermission()[0] = "Only Allowed to submit Assignments";
-        cout << right << setw(28) << "----- Student -----" << endl;
+        cout << right << setw(29) << "----- Students -----" << endl;
     }
     // List of Assignments
     void listOfAssignments(int assignNum) {
@@ -117,13 +117,13 @@ public:
 
         cout << "\n";
 
+        cout << right << setw(30) << "*********************************************" << endl;
         cout << "Updated Assignments List:" << endl;
         for (int i = 0; i < assignNum; i++) {
             cout << "Assignment #" << i + 1 << ": " << assignments[i] << endl;
         }
         cout << right << setw(30) << "*********************************************" << endl;
     }
-
 };
 
 int main() {
@@ -133,4 +133,3 @@ int main() {
 
     return 0;
 }
-
