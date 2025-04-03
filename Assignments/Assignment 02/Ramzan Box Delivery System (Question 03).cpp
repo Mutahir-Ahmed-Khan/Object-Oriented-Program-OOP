@@ -148,7 +148,7 @@ class RamzanTimeShip : public Vehicle{
     void command(string delivery, int packageID, int urgencyLevel) override {
         setUniqueID(packageID);
 
-        if (urgencyLevel > 10) {
+        if (urgencyLevel >= 10) {
             int year;
             cout << "This package is marked as urgent and historically sensitive." << endl;
             cout << "Please validate the year of the package: ";
