@@ -70,15 +70,42 @@ public:
     string* getPermission() {
         return permissions;
     }
+    string getName(){
+        return name;
+    }
+    string getEmail(){
+        return email;
+    }
+    int getID(){
+        return ID;
+    }
+    string getHash(){
+        return finalHashPass;
+    }
 };
 
 class Student : public User {
-public:
+    private:
+    int rollNo;
+
+    public:
     int status = 0;
     // Constructor
-    Student(string n, int id, string e, string p) : User(n, id, e, 1, p) {
+    Student(int roll,string n, string e, string p) : User(n, 0, e, 1, p), rollNo(roll) {
         getPermission()[0] = "Only Allowed to submit Assignments";
         cout << right << setw(29) << "----- Students -----" << endl;
+    }
+     // Display Function
+     void display() {
+        cout << right << setw(30) << "*****************************************************************" << endl;
+        cout << right << setw(19) << "NAME: " << getName() << endl;
+        cout << right << setw(20) << "EMAIL: " << getEmail() << endl;
+        cout << right << setw(22) << "ROLL NO: " << rollNo << endl;
+        cout << right << setw(30) << "PASSWORD (Hash): " << getHash() << endl;
+        for (int i = 0; i < 1; i++) {
+            cout << right << setw(25) << "Permission #" << i + 1 << ": " << getPermission()[i] << endl;
+        }
+        cout << right << setw(30) << "*****************************************************************" << endl;
     }
     // List of Assignments
     void listOfAssignments(int assignNum) {
@@ -123,11 +150,13 @@ public:
             cout << "Assignment #" << i + 1 << ": " << assignments[i] << endl;
         }
         cout << right << setw(30) << "*********************************************" << endl;
+        cout << right << setw(25) << "Status: " << status << endl;
+        cout << right << setw(30) << "*********************************************" << endl;
     }
 };
 
 int main() {
-    Student s1("Mutahir", 1020, "MutahirHere18@gmail.com", "MAK000");
+    Student s1(1030,"Mutahir","MutahirHere18@gmail.com","MAK000");
     s1.display();
     s1.listOfAssignments(3);  
 
