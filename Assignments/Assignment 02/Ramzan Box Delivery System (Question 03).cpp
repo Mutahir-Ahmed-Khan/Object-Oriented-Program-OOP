@@ -207,6 +207,8 @@ int main(){
     Vehicle* veh2 = NULL; 
     int opt2, id2, lvl2;
 
+    bool resolveResult = false;
+
     cout << "**************" << endl;
     cout << "Date: 4/3/2025" << endl;
     cout << "**************" << endl;
@@ -241,7 +243,6 @@ int main(){
     cout << right << setw(22) << "Air" << endl;
     cout << right << setw(30) << "-------------------" << endl;
     cout << "Mode Of Transport: ";
-    cin.ignore();
     getline(cin, sen2);
 
     if(sen2 == "Bulk" || sen2 == "bulk"){
@@ -259,70 +260,73 @@ int main(){
     }
 
     if (veh && veh2) {
-        resolveConflict(*veh, *veh2);
+        resolveResult = resolveConflict(*veh, *veh2);
     } else {
         cout << "One of the vehicles is not initialized correctly." << endl;
         return 0;
     }
 
     // Command Panel for Vehicle 01
-    cout << "Command Panel Vehicle 01" << endl;
-    cout << "1. Delivery" << endl;
-    cout << "2. Fast Delivery" << endl;
-    cout << "Enter the Option: ";
-    cin >> opt;
+    if (resolveResult){
+        cout << "Command Panel Vehicle 01" << endl;
+        cout << "1. Delivery" << endl;
+        cout << "2. Fast Delivery" << endl;
+        cout << "Enter the Option: ";
+        cin >> opt;
 
-    switch(opt){
-        case 1:
-            cout << "command(" << constant << ",----)" << endl;
-            cout << "Enter the PackageID: ";
-            cin >> id;
-            veh->command(constant, id);
-            cout << "Package ID = " << veh->getUniqueID() << endl;
-            veh->movement();
-            break;
-        case 2:
-            cout << "command(" << constant << ",----,-----)" << endl;
-            cout << "Enter the PackageID: ";
-            cin >> id;
-            cout << "Enter the Urgency Level (1-20): ";
-            cin >> lvl;
-            veh->command(constant, id, lvl);
-            cout << "Package with ID = " << veh->getUniqueID() << " is being delivered" << endl;
-            break;
-        default: 
-            cout << "Wrong Option" << endl;
-            break;
+        switch(opt){
+            case 1:
+                cout << "command(" << constant << ",----)" << endl;
+                cout << "Enter the PackageID: ";
+                cin >> id;
+                veh->command(constant, id);
+                cout << "Package ID = " << veh->getUniqueID() << endl;
+                veh->movement();
+                break;
+            case 2:
+                cout << "command(" << constant << ",----,-----)" << endl;
+                cout << "Enter the PackageID: ";
+                cin >> id;
+                cout << "Enter the Urgency Level (1-20): ";
+                cin >> lvl;
+                veh->command(constant, id, lvl);
+                cout << "Package with ID = " << veh->getUniqueID() << " is being delivered" << endl;
+                break;
+            default: 
+                cout << "Wrong Option" << endl;
+                break;
+        }
     }
+    else{
+        // Command Panel for Vehicle 02
+        cout << "Command Panel Vehicle 02" << endl;
+        cout << "1. Delivery" << endl;
+        cout << "2. Fast Delivery" << endl;
+        cout << "Enter the Option: ";
+        cin >> opt2;
 
-    // Command Panel for Vehicle 02
-    cout << "Command Panel Vehicle 02" << endl;
-    cout << "1. Delivery" << endl;
-    cout << "2. Fast Delivery" << endl;
-    cout << "Enter the Option: ";
-    cin >> opt2;
-
-    switch(opt2){
-        case 1:
-            cout << "command(" << constant << ",----)" << endl;
-            cout << "Enter the PackageID: ";
-            cin >> id2;
-            veh2->command(constant, id2);
-            cout << "Package ID = " << veh2->getUniqueID() << endl;
-            veh2->movement();
-            break;
-        case 2:
-            cout << "command(" << constant << ",----,-----)" << endl;
-            cout << "Enter the PackageID: ";
-            cin >> id2;
-            cout << "Enter the Urgency Level (1-20): ";
-            cin >> lvl2;
-            veh2->command(constant, id2, lvl2);
-            cout << "Package with ID = " << veh2->getUniqueID() << " is being delivered" << endl;
-            break;
-        default: 
-            cout << "Wrong Option" << endl;
-            break;
+        switch(opt2){
+            case 1:
+                cout << "command(" << constant << ",----)" << endl;
+                cout << "Enter the PackageID: ";
+                cin >> id2;
+                veh2->command(constant, id2);
+                cout << "Package ID = " << veh2->getUniqueID() << endl;
+                veh2->movement();
+                break;
+            case 2:
+                cout << "command(" << constant << ",----,-----)" << endl;
+                cout << "Enter the PackageID: ";
+                cin >> id2;
+                cout << "Enter the Urgency Level (1-20): ";
+                cin >> lvl2;
+                veh2->command(constant, id2, lvl2);
+                cout << "Package with ID = " << veh2->getUniqueID() << " is being delivered" << endl;
+                break;
+            default: 
+                cout << "Wrong Option" << endl;
+                break;
+        }
     }
 
     cout <<"(" << "Vehicle Active: " << Vehicle::activeDeliveries << ")" << endl;
