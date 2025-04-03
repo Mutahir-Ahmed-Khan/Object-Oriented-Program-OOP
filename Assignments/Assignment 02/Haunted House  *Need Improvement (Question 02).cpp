@@ -2,136 +2,122 @@
 #include <iomanip>
 using namespace std;
 
-// Operator overloading would be used in mutants, when combining two ghosts
-
-//-------------------------------------------------------------Ghosts------------------------------------------------------------//
-class Ghosts{
-    private:
+class Ghosts {
+private:
     string workerName;
     int scareLevel;
 
-    public:
-    //Constructor
-    Ghosts(string name,int level) : workerName(name), scareLevel(level) {}
+public:
+    Ghosts(string name, int level) : workerName(name), scareLevel(level) {}
 
-    //Functions
     virtual void haunt() = 0;
 
-    int getLevel(){
+    int getLevel() {
         return scareLevel;
     }
+
+    string getName() {
+        return workerName;
+    }
+
+    virtual ~Ghosts() {} 
+
+    friend class Mutants;
+    friend Ghosts* operator+(Ghosts &g1, Ghosts &g2);
 };
 
+class poltergeists : virtual public Ghosts {
+public:
+    poltergeists(string name) : Ghosts(name, 4) {}
 
-//Virtual Function because both Child Ghost inherit from Ghosts Parent (Copy of the Ghost is Avoided)
-class poltergeists : virtual public Ghosts{
-    public:
-    //Constructor
-    poltergeists(string name) : Ghosts(name,4) {}
-
-    //Function 
-    void haunt() override{
+    void haunt() override {
         cout << "*Moving Table" << endl;
         cout << "*Moving Chair" << endl;
     }
 };
 
-class Banshees : public Ghosts{
-    public:
-    //Constructor 
-    Banshees(string name) : Ghosts(name,2) {}
+class Banshees : public Ghosts {
+public:
+    Banshees(string name) : Ghosts(name, 2) {}
 
-    //Function 
-    void haunt() override{
+    void haunt() override {
         cout << "*Screaming Loudly" << endl;
     }
 };
 
-class ShadowGhosts :  virtual public Ghosts{
-    public:
-    //Constructor 
-    ShadowGhosts(string name) : Ghosts(name,8) {}
+class ShadowGhosts : virtual public Ghosts {
+public:
+    ShadowGhosts(string name) : Ghosts(name, 8) {}
 
-    //Function 
     void haunt() override {
         cout << "*Whispering Creepily" << endl;
     }
 };
 
-//Question have only discussed about ShadowPoltergeists
-class Mutants : public ShadowGhosts, public poltergeists{
-    public:
-    //Constructor 
-    Mutants(string name) : ShadowGhosts(name), poltergeists(name) , Ghosts(name, 10){}
+class Mutants : public ShadowGhosts, public poltergeists {
+public:
+    Mutants(string name, int level = 10) 
+        : ShadowGhosts(name), poltergeists(name), Ghosts(name, level) {}
 
-    //Functions
     void haunt() override {
         ShadowGhosts::haunt();
         poltergeists::haunt();
     }
 };
 
-//--------------------------------------------------------------------------------------------------------------------------------------//
+Ghosts* operator+(Ghosts &g1, Ghosts &g2) {
+    string newName = g1.getName() + " & " + g2.getName();
+    int newLevel = g1.getLevel() + g2.getLevel();
+    return new Mutants(newName, newLevel);
+}
 
-//------------------------------------------Haunted House -----------------------------------------------------------------------------//
-class hauntedHouse{
-    private:
+class hauntedHouse {
+private:
     string name;
-    Ghosts *ghosts;
+    Ghosts *ghost;
 
-    public:
-    //Constructor
-    hauntedHouse(string n, Ghosts *g) : name(n), ghosts(g) {}
+public:
+    hauntedHouse(string n, Ghosts *g) : name(n), ghost(g) {}
 
-    //Functions
-    void Haunted(){
+    void Haunted() {
         cout << "--------- NAME ---------" << endl;
         cout << right << setw(18) << name << endl;
         cout << "------------------------" << endl;
-       
-
-        ghosts->haunt();
+        ghost->haunt();
     }
-  
 };
 
-//--------------------------------------------------------------------------------------------------------------------------------------//
-
-//---------------------------------------------------------Visitor------------------------------------------------------------------------//
 class Visitor {
-    private:
+private:
     string name;
     int bravery;
     Ghosts *ghost;
 
-    public:
-    //Constructor (No need to call Ghost Constructor)
-    Visitor(string n, int b,Ghosts *g) : name(n), bravery(b), ghost(g) {}
+public:
+    Visitor(string n, int b, Ghosts *g) : name(n), bravery(b), ghost(g) {}
 
-    //Functions
-    void Reaction(){
-        if(bravery < ghost->getLevel()){
-            cout << name << "Running Away " << endl;
-        }
-        else{
-            cout << name << "Laughing " << endl;
+    void Reaction() {
+        if (bravery < ghost->getLevel()) {
+            cout << name << " is Running Away!" << endl;
+        } else {
+            cout << name << " is Laughing!" << endl;
         }
     }
-
 };
-//----------------------------------------------------------------------------------------------------------------------------------------//
 
-
-int main(){
+int main() {
     poltergeists poltergeist("Casper");
     Banshees banshee("Screamer");
     ShadowGhosts shadowGhost("Dark Whisper");
     Mutants mutantGhost("Hybrid Phantom");
 
+    Ghosts *combinedGhost = poltergeist + shadowGhost;
+
     hauntedHouse house1("Spooky Manor", &poltergeist);
     hauntedHouse house2("Phantom Castle", &banshee);
     hauntedHouse house3("Ghostly Shack", &shadowGhost);
     hauntedHouse house4("Mutant Lair", &mutantGhost);
+    hauntedHouse house5("Hybrid Haunt", combinedGhost);
 
     Visitor visitor1("John", 5, &banshee);
     Visitor visitor2("Alice", 9, &mutantGhost);
@@ -147,6 +133,11 @@ int main(){
 
     house4.Haunted();
     visitor2.Reaction(); 
+
+    house5.Haunted();
+    visitor2.Reaction(); 
+
+    delete combinedGhost;
 
     return 0;
 }
