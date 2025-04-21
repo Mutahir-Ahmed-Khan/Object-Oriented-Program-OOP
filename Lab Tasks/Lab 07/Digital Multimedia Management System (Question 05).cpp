@@ -49,7 +49,6 @@ public:
     }
 };
 
-// Derived class: DVD
 class DVD : public Media {
 private:
     string director;
@@ -62,7 +61,6 @@ public:
     }
 };
 
-// Derived class: CD
 class CD : public Media {
 private:
     string artist;
@@ -75,7 +73,6 @@ public:
     }
 };
 
-// Derived class: Magazine (no extra attributes given, but still included)
 class Magazine : public Media {
 public:
     void displayInfo() {
