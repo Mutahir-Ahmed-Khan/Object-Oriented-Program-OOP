@@ -1,0 +1,21 @@
+---------- Chapter 01 (Mercedes) ----------
+Mercedes-Benz is a world-renowned luxury automobile manufacturer based in Stuttgart, Germany.
+Officially founded in 1926, the company traces its roots to Karl Benz and Gottlieb Daimler, two pioneers of automotive engineering. 
+The iconic three-pointed star logo of Mercedes-Benz symbolizes its ambition to dominate transportation on land, sea, and air. 
+Over the decades, Mercedes has become synonymous with innovation, performance, and luxury. 
+Its product range includes premium sedans like the S-Class, C-Class, and E-Class, a strong lineup of 
+SUVs such as the GLA, GLC, GLE, and GLS, as well as commercial trucks and buses. 
+In recent years, Mercedes-Benz has also invested heavily in electric vehicles, introducing the EQ series featuring models like the
+EQS and EQE. Known for its commitment to quality, safety, and cutting-edge technology, Mercedes-Benz operates under the slogan 
+"The Best or Nothing," emphasizing its pursuit of excellence in every vehicle it produces.
+
+--------- Chapter 02 (BMW) ----------
+BMW — short for Bayerische Motoren Werke AG — is a prestigious German automobile, motorcycle, and engine manufacturing company, 
+headquartered in Munich, Bavaria. Founded in 1916 originally as an aircraft engine producer, BMW shifted focus to motorcycles 
+and then automobiles after World War I. The company’s blue-and-white roundel logo symbolizes the colors of the Bavarian flag 
+and is often associated with a spinning airplane propeller, honoring its early aviation history. BMW is famous for producing 
+vehicles that blend performance, luxury, and cutting-edge engineering. Their lineup includes sporty sedans like the 3 Series 
+and 5 Series, luxury models such as the 7 Series, and a wide range of SUVs under the "X" series. They have also entered the 
+electric vehicle market with their "i" series, including models like the i4 and iX. Known for their slogan "The Ultimate Driving 
+Machine," BMW has built a global reputation for delivering an exhilarating driving experience combined with sophisticated design 
+and technology
