@@ -35,7 +35,7 @@ private:
     string pickUp;
     string dropOff;
     int fee;
-    const int actualFee = 40000;
+    const int actualFee = 40000; 
    
     public:
     //Constructor
@@ -94,6 +94,38 @@ private:
     string getDropOff(){
         return dropOff;
     }
+
+    //----------------------------------------------------------------------------------------------- FILING -----------------------------------------------------------------//
+    void saveToFile() {
+        ofstream out("students.bin", ios::binary | ios::out | ios::trunc);
+
+        int count = 1; 
+        out.write((char*)&count, sizeof(count)); 
+
+        out.write((char*)this, sizeof(*this)); 
+        cout << "Saved to File" << endl; 
+        out.close();
+        
+    }
+
+    void loadFromFile() {
+        ifstream in("students.bin", ios::binary | ios::in);
+
+        if (!in) {
+            cout << "No student file found!" << endl;
+            return;
+        }
+
+        int count;
+        in.read((char*)&count, sizeof(count));
+
+        if (count > 0) {
+            in.read((char*)this, sizeof(*this));
+        }
+
+        in.close();
+    }
+    //----------------------------------------------------------------------------------------------- FILING -----------------------------------------------------------------//
 
 };
 
@@ -304,6 +336,8 @@ int main() {
                 getline(cin,d);
                 student01.setDepartment(d);
                 cout << "*********************" << endl;
+
+                student01.saveToFile(); //Filing 
                 break;
             case 2:
                 bus1.displayBusInfo();
@@ -330,6 +364,7 @@ int main() {
                 cin >> f;
                 student01.makePayment(f);
                 cout << student01.getName() << "'s" <<" ("<< student01.getID() << ") "<< "Card: " << student01.getIsActive() << endl;
+
                 break;
             case 4:
                 if(student01.getIsActive() == "Active"){
@@ -342,6 +377,8 @@ int main() {
                     cin.ignore();
                     getline(cin,drop);
                     student01.setDropOff(drop);
+
+                    student01.saveToFile(); // Filing
                 }
                 else{
                     cout << "Clear Payment First" << endl;
