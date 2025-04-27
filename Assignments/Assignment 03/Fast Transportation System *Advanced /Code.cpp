@@ -6,6 +6,8 @@ using namespace std;
 // Composition in Students, if a student object is deleted, fee pickup and drop-off would be deleted too
 //Aggrigation in bus, if a bus object is deleted the students would remain
 //Comments are for own Understanding
+//ALL Save to File done
+// Only routine Funvtion Left
 //-----------NEW ------------------------
 class Person{
     public:
@@ -23,6 +25,31 @@ class Person{
 
     //Login Function as stated by Assignment 03
     virtual int login() = 0;
+
+    //----------------------------------------------------------------------------------------------- FILING -----------------------------------------------------------------//
+    void saveAdmin(Person* p) {
+        ofstream out("admin.bin", ios::binary | ios::out | ios::trunc);
+    
+        int count = 1; 
+        out.write((char*)&count, sizeof(count));
+        out.write((char*)p, sizeof(*p)); 
+        cout << "Saved to File" << endl;
+        out.close();
+    }
+    
+    void loadAdmin(Person* &p) {
+        ifstream in("admin.bin", ios::binary | ios::in);
+    
+        if (!in) {
+            cout << "No admin file found!" << endl;
+            return;
+        }
+    
+        int count;
+        in.read((char*)&count, sizeof(count));
+        in.close();
+    }
+    //----------------------------------------------------------------------------------------------- FILING -----------------------------------------------------------------//
 };
 //--------------------------------------------------
 
@@ -164,7 +191,42 @@ class Attendance{
         }
     }
     
+    //----------------------------------------------------------------------------------------------- FILING -----------------------------------------------------------------//
+    void saveAttendance(Attendance& att) {
+        ofstream out("attendance.bin", ios::binary | ios::out | ios::trunc);
+        int days = 30;
+        out.write((char*)&days, sizeof(days));
+        for (int i = 0; i < 30; i++) {
+            int len = att.attendance[i].length();
+            out.write((char*)&len, sizeof(len));
+            out.write(att.attendance[i].c_str(), len);
+        }
+        out.close();
+
+        cout << "Saved to File" << endl;
+    }
     
+    void loadAttendance(Attendance& att) {
+        ifstream in("attendance.bin", ios::binary | ios::in);
+        if (!in) {
+            cout << "No attendance file found!" << endl;
+            return;
+        }
+        int days;
+        in.read((char*)&days, sizeof(days));
+        for (int i = 0; i < days; i++) {
+            int len;
+            in.read((char*)&len, sizeof(len));
+            char* temp = new char[len + 1];
+            in.read(temp, len);
+            temp[len] = '\0';
+            att.attendance[i] = temp;
+            delete[] temp;
+        }
+        in.close();
+    }
+    
+    //----------------------------------------------------------------------------------------------- FILING -----------------------------------------------------------------//
 };
 
 class Bus {
@@ -391,6 +453,8 @@ int main() {
                 cin >> att;
                 attendance.setAttendance(date,att);
                 cout << "Attendance recorded for Day " << date << ": " << attendance.getAttendance(date) << endl;
+
+                attendance.saveAttendance(attendance);
                 break;
             case 6:
                 cout << "****************************************" << endl;
@@ -431,6 +495,7 @@ int main() {
 
                                 cout << "Enter the ID: ";
                                 cin >> ptr->ID;
+                                ptr->saveAdmin(ptr);
                             }
                             else{
                                 cout << "Wrong Password" << endl;
@@ -446,6 +511,7 @@ int main() {
 
                                 cout << "Enter the ID: ";
                                 cin >> ptr->ID;
+                                ptr->saveAdmin(ptr);
                             }
                             else{
                                 cout << "Wrong OTP" << endl;
