@@ -1,13 +1,13 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <exception>
 using namespace std;
 
 // Composition in Students, if a student object is deleted, fee pickup and drop-off would be deleted too
 //Aggrigation in bus, if a bus object is deleted the students would remain
 //Comments are for own Understanding
-//ALL Save to File done
-// Only routine Funvtion Left
+
 //-----------NEW ------------------------
 class Person{
     public:
@@ -23,7 +23,7 @@ class Person{
     }
     virtual void Pay(int fee) = 0;
 
-    //Login Function as stated by Assignment 03
+    
     virtual int login() = 0;
 
     //----------------------------------------------------------------------------------------------- FILING -----------------------------------------------------------------//
@@ -64,11 +64,11 @@ private:
     const int actualFee = 40000; 
    
     public:
-    //Constructor
+  
     Students() : 
         studentID(0), name(""), department(""), isActive("Inactive"), pickUp(""), dropOff("") ,fee(0) {}
 
-    //Getter and Setters
+    
     void setID(int studentID){
         this -> studentID = studentID;
     }
@@ -94,7 +94,7 @@ private:
         return isActive;
     }
 
-    //Make Payment
+   
     void makePayment(int fee){
         this -> fee = fee;
         if(this-> fee >= actualFee){
@@ -107,7 +107,7 @@ private:
         }
     }
     
-    //Assigning Stops
+    
     void setPickUp(string pickUp){
         this -> pickUp = pickUp;
     }
@@ -125,6 +125,10 @@ private:
     void saveToFile() {
         ofstream out("students.bin", ios::binary | ios::out | ios::trunc);
 
+        if (out.fail() || out.bad()) {
+            cout << "File write failed!" << endl;
+        }
+
         int count = 1; 
         out.write((char*)&count, sizeof(count)); 
 
@@ -140,6 +144,13 @@ private:
         if (!in) {
             cout << "No student file found!" << endl;
             return;
+        }
+
+        if (in.fail()) {
+            cout << "Logical error on input operation" << endl;
+        }
+        if (in.bad()) {
+            cout << "Read/writing error on input operation" << endl;
         }
 
         int count;
@@ -160,19 +171,23 @@ class Attendance{
     string* attendance;
 
     public:
-    //DMA
+    
     Attendance(){
-        attendance = new string[30];
-        for (int i = 0; i < 30; i++) {
-            attendance[i] = "*"; 
+        try {
+            attendance = new string[30];
+            for (int i = 0; i < 30; i++) {
+                attendance[i] = "*";
+            }
+        } catch (bad_alloc &e) {
+            cout << "Memory allocation failed in Attendance constructor: " << e.what() << endl;
         }
     } 
-    // Destructor 
+    
     ~Attendance() {
         delete[] attendance;
     }
 
-    //Recording Attendance
+    
     void setAttendance(int Date,string status){
         if(Date >= 1 && Date <= 31){
             this -> attendance[Date - 1] = status;
@@ -237,7 +252,7 @@ class Bus {
         int studentCount;
     
     public:
-        // Constructor
+    
         Bus(string id, string route, int cap) : busID(id), routeID(route), capacity(cap), studentCount(0) {
             for (int i = 0; i < 10; i++) {
                 assignedStudents[i] = 0;
@@ -275,7 +290,7 @@ class teacher : public Person{
     int teacherFee = 7000;
 
     public:
-    //Constructor of Teacher and Students
+
     teacher() : Person() {
         cout << right  << setw(30)<<"I am the constructor of Teacher" << endl;
     }
@@ -284,7 +299,7 @@ class teacher : public Person{
         cout << "I am the Destructor of the " << name << endl;
     }
 
-    //Function
+    
     void setSubject(string subject){
         this-> subject = subject;
     }
@@ -301,7 +316,6 @@ class teacher : public Person{
         }
     }
 
-    //Assignment 03 Requirements
     int login() override{
         int pass;
         cout << "Enter the Password: ";
@@ -318,7 +332,7 @@ class staff: public Person{
     const int staffFee = 5000;
 
     public: 
-    //Constructor of students and Staff Memeber
+
     staff() : Person(){
         cout <<"I am the Constructor of Staff" << endl;
     }
@@ -327,7 +341,6 @@ class staff: public Person{
         cout << "I am the Destructor of the " << name << endl;
     }
 
-    //Function
     void setArea(string Area){
         this -> Area = Area;
     }
@@ -353,6 +366,11 @@ class staff: public Person{
     }
     
 };
+
+void routine (Students std, Attendance att){
+    std.loadFromFile();
+    att.loadAttendance(att);
+}
     
 
 int main() {
@@ -365,6 +383,8 @@ int main() {
     string n,d,drop,pick,att;
     bool end = true;
     Person *ptr = nullptr;
+
+    routine(student01,attendance);
 
     while(end){
         cout << "-------------------" << endl;
@@ -398,7 +418,7 @@ int main() {
                 student01.setDepartment(d);
                 cout << "*********************" << endl;
 
-                student01.saveToFile(); //Filing 
+                student01.saveToFile();  
                 break;
             case 2:
                 bus1.displayBusInfo();
@@ -439,7 +459,7 @@ int main() {
                     getline(cin,drop);
                     student01.setDropOff(drop);
 
-                    student01.saveToFile(); // Filing
+                    student01.saveToFile(); 
                 }
                 else{
                     cout << "Clear Payment First" << endl;
