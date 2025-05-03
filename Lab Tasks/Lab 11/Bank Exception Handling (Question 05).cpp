@@ -37,7 +37,7 @@ int main() {
         b1.withdraw(am);
     }
     catch (suffBalance &e) {
-        cout << "Exception: " << e.what() << endl;
+        cout << "Exception: " << e.what() << "Deficit: " << am - balance << endl;
     }
 
     return 0;
