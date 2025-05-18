@@ -1,7 +1,5 @@
 class Customer {
 private:
-    string customerID;
-    string name;
     JewelryItem** purchasedItems; // dynamic array of pointers
     int itemCount;
     int capacity;
@@ -17,9 +15,7 @@ private:
     }
 
 public:
-    Customer(string id = "", string n = "") {
-        customerID = id;
-        name = n;
+    Customer() {
         capacity = 2;
         itemCount = 0;
         purchasedItems = new JewelryItem*[capacity];
@@ -30,24 +26,6 @@ public:
             resize();
         }
         purchasedItems[itemCount++] = item;
-    }
-
-    double calculateTotalPurchasePrice() {
-        double total = 0;
-        for (int i = 0; i < itemCount; i++) {
-            total += purchasedItems[i]->calculatePrice();
-        }
-        return total;
-    }
-
-    void displayPurchasedItems() {
-        cout << "Customer ID: " << customerID << ", Name: " << name << endl;
-        cout << "Purchased Items:" << endl;
-        for (int i = 0; i < itemCount; i++) {
-            purchasedItems[i]->displayDetails();
-            cout << "--------------------" << endl;
-        }
-        cout << "Total Price: " << calculateTotalPurchasePrice() << endl;
     }
 
     ~Customer() {
